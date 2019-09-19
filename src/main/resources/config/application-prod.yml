@@ -1,0 +1,35 @@
+server:
+  # 端口
+  port: 8067
+  # 项目路径
+  servlet:
+    context-path: /
+
+spring:
+  # 数据源相关配置
+  datasource:
+    username: learning
+    password: learning
+    # 使用MySQL连接驱动是8.0以上，需要在Url后面加上时区, GMT%2B8（代表北京时区），也可以用CTT（上海时间）不然报时区错误
+    url: jdbc:mysql://localhost:3306/chat?characterEncoding=UTF-8&serverTimezone=CTT
+    # 注意:mysql 8.x版本驱动包，要使用 com.mysql.cj.jdbc.Driver 作为驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 引入Druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 数据源其他配置, DataSourceProperties中没有相关属性,默认无法绑定
+    initialSize: 8
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 25
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500

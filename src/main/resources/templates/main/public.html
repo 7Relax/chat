@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head id="public_head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>聊天室 - By龙小文</title>
+    <!-- css begin -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/public.css}"/>
+    <!-- css end -->
+    <!-- js begin -->
+    <script type="text/javascript" th:src="@{/js/core/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/core/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/layer/layer.js}"></script>
+    <!-- js end -->
+</head>
+<body>
+    <common id="public_common">
+        <input type="text" id="basePath" th:value="${basePath}" style="display:none"/>
+        <script>
+            // basePath
+            common.basePath = $("#basePath").val();
+            // 动态调整input框的宽度
+            function adjustInputWidth() {
+                var width = $(".registry-btn").width();
+                $(".input-username").width(width-14);
+                $(".input-password").width(width-14);
+            }
+        </script>
+    </common>
+</body>
+</html>

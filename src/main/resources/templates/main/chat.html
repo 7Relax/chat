@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="main/public :: #public_head">
+    </head>
+    <body>
+        <!-- 聊天界面 -->
+        <div class="chat-title">
+            <div class="chat-title-nav" id="chat-title-nav">私密聊</div>
+            <div class="room-msg">
+                <div>
+                    <span>房间号:</span>
+                    <span id="room-no"></span>
+                </div>
+                <div>
+                    <span>&nbsp;人数:</span>
+                    <span id="people-num"></span>
+                </div>
+            </div>
+        </div>
+        <div class="chat-content" id="chat-content"></div>
+        <div class="chat-bottom">
+            <input type="text" class="send-content" id="send-content" name="send-content" onblur="chat.blur();"/>
+            <button type="button" class="send-msg" id="send-msg" onclick="chat.send();">发送</button>
+        </div>
+        <input type="hidden" id="sid" th:value="${#httpSession.getAttribute('sid')}"/>
+        <input type="hidden" id="loginUser" th:value="${#httpSession.getAttribute('loginUser')}"/>
+        <input type="hidden" id="roomNo" th:value="${#httpSession.getAttribute('roomNo')}"/>
+        <input type="hidden" id="roomType" th:value="${#httpSession.getAttribute('roomType')}"/>
+        <common th:replace="main/public :: #public_common"></common>
+    </body>
+    <!-- js begin -->
+    <script type="text/javascript" th:src="@{/js/logic/chat.js}"></script>
+    <script type="text/javascript" th:src="@{/js/tool/jsencrypt.js}"></script>
+    <script type="text/javascript" th:src="@{/js/tool/sha256.js}"></script>
+    <script type="text/javascript" th:src="@{/js/tool/aes.js}"></script>
+    <!-- js end -->
+</html>

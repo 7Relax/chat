@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 核心配置文件 -->
+
+    <!-- settings 这是 MyBatis 中极为重要的调整设置，
+         它们会改变 MyBatis 的运行时行为 -->
+    <settings>
+        <!-- 开启自动驼峰命名规则映射，
+            即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!-- 这里是全局配置 允许 JDBC 支持自动生成主键，需要驱动支持。
+             如果设置为 true 则这个设置强制使用自动生成主键，
+             尽管一些驱动不能支持但仍可正常工作（比如 Derby）-->
+        <setting name="useGeneratedKeys" value="true"/>
+
+    </settings>
+
+
+</configuration>

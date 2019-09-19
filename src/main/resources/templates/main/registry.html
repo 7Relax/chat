@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="main/public :: #public_head">
+    </head>
+    <body>
+        <!-- 注册界面 -->
+        <div class="login-wrap">
+            <form id="registryForm" th:action="@{/registry}" th:method="post">
+                <div class="login-con">
+                    <h3>用户注册</h3>
+                    <div class="errorMsg" id="errorMsg" th:text="${msg}"></div>
+                    <input class="input-username" type="text" placeholder="请输入昵称" id="username" name="username">
+                    <input class="input-password" type="password" placeholder="请输入密码" id="password" name="password">
+                    <button type="button" class="registry-btn" onclick="registry();">注册</button>
+                </div>
+            </form>
+        </div>
+        <common th:replace="main/public :: #public_common"></common>
+    </body>
+    <script>
+        function registry() {
+            console.log("registry ... ");
+            var username = $("#username").val();
+            var password = $("#password").val();
+            if (username.trim() == '' || password.trim() == '') {
+                $("#errorMsg").text("请将信息输入完整！");
+                return;
+            }
+            var params = {username : username, password : password.trim()};
+            $.fn.ajax("registry", params, function (data) {
+                var code = data.resultCode;
+                if (code === 0) {
+                    layer.alert('注册成功，点击确认', {
+                        skin: 'layer-customize-skin' //样式类名
+                        ,closeBtn: 0
+                    }, function() {
+                        // 跳转到登录界面
+                        window.location.href = common.basePath;
+                    });
+                } else {
+                    var msg = data.resultMessage;
+                    $("#errorMsg").text(msg);
+                }
+            });
+        }
+        document.onkeydown = function(event){
+            if (event.keyCode === 13) {
+                registry();
+            }
+        };
+        window.onresize = function(){
+            adjustInputWidth();
+        };
+        $(function () {
+            console.log("registry 页面 -> start ...... ");
+            adjustInputWidth();
+        });
+    </script>
+</html>

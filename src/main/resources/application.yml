@@ -1,0 +1,25 @@
+spring:
+  # 服务器环境配置
+  profiles:
+    active: dev
+
+  # i18n配置
+  messages:
+    basename: i18n.chat
+  # jpa相关配置
+  jpa:
+    hibernate:
+      # 会根据映射实体类自动创建或更新数据表
+      ddl-auto: update
+    # 控制打印sql语句
+    show-sql: true
+    # 指定引擎，创建表时表类型为innodb类型，如果不指定则是MyISAM的表类型，而MyISAM不支持事务
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+
+# 配置Mybatis相关文件路径，因为Springboot并不知道这些文件
+mybatis:
+  # 核心配置文件路径
+  config-location: classpath:mybatis/mybatis-config.xml
+  # 映射配置文件路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="main/public :: #public_head">
+    </head>
+    <body>
+        <!-- 登录界面 -->
+        <div class="login-wrap">
+            <form id="loginForm" th:action="@{/login}" th:method="post">
+                <div class="login-con">
+                    <h3>用户登录</h3>
+                    <div class="errorMsg" id="errorMsg" th:text="${msg}"></div>
+                    <input class="input-username" type="text" placeholder="请输入账号" id="username" name="username">
+                    <input class="input-password" type="password" placeholder="请输入密码" id="password" name="password">
+                    <a class="registry-btn" th:href="@{/toRegistry}" href="#">注册</a>
+                    <button type="button" class="login-btn" onclick="login();">登录</button>
+                </div>
+            </form>
+        </div>
+        <common th:replace="main/public :: #public_common"></common>
+    </body>
+    <script type="text/javascript" th:src="@{/js/tool/sha256.js}"></script>
+    <script>
+        function login() {
+            console.log("login ...");
+            var username = $("#username").val();
+            var password = $("#password").val();
+            if (username.trim() == '' || password.trim() == '') {
+                // layer.msg("请将信息输入完整！");
+                $("#errorMsg").text("请将信息输入完整！");
+                return;
+            }
+            $("#username").val(username);
+            $("#password").val(password.trim());
+            $("#loginForm").submit();
+        }
+    </script>
+    <script>
+        $(function () {
+            console.log("login 页面 -> start ...... ");
+            adjustInputWidth();
+        });
+        document.onkeydown = function(event){
+            if (event.keyCode === 13) {
+                login();
+            }
+        };
+        window.onresize = function(){
+            adjustInputWidth();
+        };
+    </script>
+</html>

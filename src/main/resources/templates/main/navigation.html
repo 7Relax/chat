@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="main/public :: #public_head">
+    </head>
+    <body class="nav-body">
+        <!-- 导航界面，用户登录成功后显示 -->
+        <div class="nav-whole">
+            <div>
+                <div class="nav nav-private">
+<!--                    <a class="nav-btn" th:href="@{/createPrivateRoom/} + ${loginUser}" onclick="navigation.private();">私密聊</a>-->
+                    <a class="nav-btn" onclick="navigation.private();">私密聊</a>
+                </div>
+                <div class="nav nav-public">
+                    <a class="nav-btn" onclick="navigation.public();">多人聊</a>
+                </div>
+            </div>
+            <div>
+                <div class="nav nav-customization">
+                    <a class="nav-btn" onclick="navigation.customization();">自定义聊</a>
+                </div>
+                <div class="nav nav-find-room">
+                    <a class="nav-btn" onclick="navigation.findRoom();">查找房间</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="nav nav-author-info">
+                    <a class="nav-btn" onclick="navigation.authorInfo();">作者信息</a>
+                </div>
+                <div class="nav nav-setting">
+                    <a class="nav-btn" onclick="navigation.setting();">设置</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 通过：map.put("loginUser", username); -->
+        <input type="hidden" id="loginUser" th:value="${loginUser}"/>
+        <input type="hidden" id="sid" th:value="${sid}"/>
+
+        <!-- request.setAttribute("loginUser", username); -->
+<!--        <input type="hidden" id="loginUser2" th:value="${#httpServletRequest.getAttribute('loginUser')}"/>-->
+
+        <!-- HttpSession session = request.getSession(); session.setAttribute("loginUser", username); -->
+<!--        <input type="hidden" id="loginUser3" th:value="${#httpSession.getAttribute('loginUser')}"/>-->
+
+        <common th:replace="main/public :: #public_common"></common>
+    </body>
+    <!-- js begin -->
+    <script type="text/javascript" th:src="@{/js/logic/navigation.js}"></script>
+    <!-- js end -->
+</html>
